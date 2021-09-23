@@ -1,4 +1,4 @@
-package com.krose;
+package com.krose.io;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
