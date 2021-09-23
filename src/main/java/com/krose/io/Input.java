@@ -7,6 +7,7 @@ import java.io.Reader;
 
 public class Input {
     private static final int DEFAULT_INTEGER = 0;
+    private static final double DEFAULT_DOUBLE = 0.0;
 
     private static Input instance;
 
@@ -47,6 +48,22 @@ public class Input {
             if(input == null) return defaultValue;
             try {
                 return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                handleInputException(e);
+            }
+        }
+    }
+
+    public double getDouble() {
+        return getDouble(DEFAULT_DOUBLE);
+    }
+
+    public double getDouble(double defaultValue) {
+        while(true) {
+            String input = getString();
+            if(input == null) return defaultValue;
+            try {
+                return Double.parseDouble(input);
             } catch (NumberFormatException e) {
                 handleInputException(e);
             }
