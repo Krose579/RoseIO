@@ -17,31 +17,30 @@ public final class Input {
     }
 
     public String getString() {
-        try {
-            return bufferedReader.readLine();
-        } catch (IOException e) {
-            return null;
+        int retryCount = 3;
+        while (retryCount > 0) {
+            try {
+                return bufferedReader.readLine();
+            } catch (IOException ignored) {}
+            retryCount--;
         }
+        return "";
     }
 
     public boolean getBoolean() {
-        String input = getString();
-        if(input == null) return false;
-        return Boolean.parseBoolean(input);
+        return Boolean.parseBoolean(getString());
     }
 
     public Integer getInteger() {
         try {
-            String input = getString();
-            if (input != null) return Integer.parseInt(input);
+            Integer.parseInt(getString());
         } catch (NumberFormatException ignored) {}
         return null;
     }
 
     public Double getDouble() {
         try {
-            String input = getString();
-            if (input != null) return Double.parseDouble(input);
+            return Double.parseDouble(getString());
         } catch (NumberFormatException ignored) {}
         return null;
     }
