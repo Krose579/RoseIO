@@ -16,32 +16,20 @@ public final class Input {
         this.bufferedReader = new BufferedReader(reader);
     }
 
-    public String getString() {
-        int retryCount = 3;
-        while (retryCount > 0) {
-            try {
-                return bufferedReader.readLine();
-            } catch (IOException ignored) {}
-            retryCount--;
-        }
-        return "";
+    public String getString() throws IOException {
+        return bufferedReader.readLine();
     }
 
-    public boolean getBoolean() {
-        return Boolean.parseBoolean(getString());
+    public boolean getBoolean() throws IOException {
+        String input = getString();
+        return Boolean.parseBoolean(input);
     }
 
-    public Integer getInteger() {
-        try {
-            Integer.parseInt(getString());
-        } catch (NumberFormatException ignored) {}
-        return null;
+    public int getInteger() throws IOException, NumberFormatException {
+        return Integer.parseInt(getString());
     }
 
-    public Double getDouble() {
-        try {
-            return Double.parseDouble(getString());
-        } catch (NumberFormatException ignored) {}
-        return null;
+    public Double getDouble() throws IOException, NumberFormatException {
+        return Double.parseDouble(getString());
     }
 }

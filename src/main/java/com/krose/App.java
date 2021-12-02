@@ -6,8 +6,10 @@ import com.krose.io.Input;
 import com.krose.io.Output;
 import com.krose.io.guice.SystemIOModule;
 
+import java.io.IOException;
+
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Injector injector = Guice.createInjector(new SystemIOModule());
         Input input = injector.getInstance(Input.class);
         Output output = injector.getInstance(Output.class);
