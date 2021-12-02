@@ -16,7 +16,7 @@ public final class Input {
         this.bufferedReader = new BufferedReader(reader);
     }
 
-    private String getString() {
+    public String getString() {
         try {
             return bufferedReader.readLine();
         } catch (IOException e) {
