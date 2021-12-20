@@ -1,76 +1,35 @@
 package com.krose.io;
 
+import com.google.inject.Inject;
+
+import javax.inject.Singleton;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
 
-public class Input {
-    private static final int DEFAULT_INTEGER = 0;
-    private static final double DEFAULT_DOUBLE = 0.0;
+@Singleton
+public final class Input {
+    private final BufferedReader bufferedReader;
 
-    private static Input instance;
-
-    public static Input getInstance() {
-        if(instance == null) instance = new Input();
-        return instance;
-    }
-
-    private BufferedReader bufferedReader;
-    
-    public Input() {
-        this(new InputStreamReader(System.in));
-    }
-
+    @Inject
     public Input(Reader reader) {
         this.bufferedReader = new BufferedReader(reader);
     }
 
-    public String getString() {
-        return getString(null);
+    public String getString() throws IOException {
+        return bufferedReader.readLine();
     }
 
-    public String getString(String defaultValue) {
-        try {
-            return bufferedReader.readLine();
-        } catch (IOException e) {
-            return defaultValue;
-        }
+    public boolean getBoolean() throws IOException {
+        String input = getString();
+        return Boolean.parseBoolean(input);
     }
 
-    public int getInteger() {
-        return getInteger(DEFAULT_INTEGER);
+    public int getInteger() throws IOException, NumberFormatException {
+        return Integer.parseInt(getString());
     }
 
-    public int getInteger(int defaultValue) {
-        while(true) {
-            String input = getString();
-            if(input == null) return defaultValue;
-            try {
-                return Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                handleInputException(e);
-            }
-        }
-    }
-
-    public double getDouble() {
-        return getDouble(DEFAULT_DOUBLE);
-    }
-
-    public double getDouble(double defaultValue) {
-        while(true) {
-            String input = getString();
-            if(input == null) return defaultValue;
-            try {
-                return Double.parseDouble(input);
-            } catch (NumberFormatException e) {
-                handleInputException(e);
-            }
-        }
-    }
-
-    private void handleInputException(Exception e) {
-        Output.getInstance().write("Exception ocurred.");
+    public Double getDouble() throws IOException, NumberFormatException {
+        return Double.parseDouble(getString());
     }
 }
