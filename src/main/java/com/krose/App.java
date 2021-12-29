@@ -21,13 +21,7 @@ public class App {
         output.writeLine("Right!?", Output.Alignment.RIGHT);
         output.writeDivider('-');
         output.write("Enter Integer Value 1: ");
-        Integer i1 = input.getInteger();
-        output.writeLine("i1 = " + (i1 != null ? i1.toString() : "null"));
-        Integer i2 = null;
-        while (i2 == null) {
-            output.write("Enter Integer Value 2: ");
-            i2 = input.getInteger();
-        }
-        output.writeLine("i2 = " + i2);
+        int i1 = input.getInteger();
+        output.writeLine("i1 = " + i1);
     }
 }

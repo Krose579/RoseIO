@@ -14,10 +14,10 @@ public class Output {
     private final BufferedWriter bufferedWriter;
 
     @Inject
-    public Output(Writer writer) {
+    public Output(BufferedWriter bufferedWriter) {
         this.lineLength = 50;
         this.dividerSymbol = '#';
-        this.bufferedWriter = new BufferedWriter(writer);
+        this.bufferedWriter = bufferedWriter;
     }
 
     public int getLineLength() {

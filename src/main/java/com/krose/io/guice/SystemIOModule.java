@@ -3,10 +3,7 @@ package com.krose.io.guice;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 
 public class SystemIOModule extends AbstractModule {
     @Provides
@@ -15,7 +12,17 @@ public class SystemIOModule extends AbstractModule {
     }
 
     @Provides
+    public BufferedReader provideBufferedReader(Reader reader) {
+        return new BufferedReader(reader);
+    }
+
+    @Provides
     public Writer provideWriter() {
         return new OutputStreamWriter(System.out);
+    }
+
+    @Provides
+    public BufferedWriter provideBufferedWriter(Writer writer) {
+        return new BufferedWriter(writer);
     }
 }

@@ -5,15 +5,14 @@ import com.google.inject.Inject;
 import javax.inject.Singleton;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.Reader;
 
 @Singleton
-public final class Input {
+public class Input {
     private final BufferedReader bufferedReader;
 
     @Inject
-    public Input(Reader reader) {
-        this.bufferedReader = new BufferedReader(reader);
+    public Input(BufferedReader bufferedReader) {
+        this.bufferedReader = bufferedReader;
     }
 
     public String getString() throws IOException {
@@ -21,8 +20,7 @@ public final class Input {
     }
 
     public boolean getBoolean() throws IOException {
-        String input = getString();
-        return Boolean.parseBoolean(input);
+        return Boolean.parseBoolean(getString());
     }
 
     public int getInteger() throws IOException, NumberFormatException {
